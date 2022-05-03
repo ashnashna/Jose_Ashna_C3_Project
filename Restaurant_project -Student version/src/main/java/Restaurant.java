@@ -68,8 +68,15 @@ public class Restaurant {
     public String getName() {
         return name;
     }
-    public int calculateOderValue(ArrayList<String> itemList) {
-        return null;
+    public int calculateOderValue(ArrayList<String> itemList){
+        int orderValue=0;
+        String itemDetails;
+        for(String item:itemList)
+        {
+            itemDetails=findItemByName(item).toString();
+            orderValue+= Integer.parseInt(itemDetails.replaceAll("[^0-9]", ""));
+        }
+        return orderValue;
     }
 
 }
