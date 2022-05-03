@@ -7,11 +7,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
-
+    ArrayList<String> addItemsList = new ArrayList<String>();
     int initialMenuSize;
     @BeforeEach
     public void setup()
@@ -58,4 +60,21 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
-}
+
+    @Test
+    public void calculating_total_order_value_should_take_parameter_as_list_of_Strings(){
+        addItemsList.add("Sweet corn soup");
+        restaurant.calculateOderValue(addItemsList);
+    }
+    @Test
+    public void calculating_total_order_value_should_return_order_value_as_int(){
+        assertTrue(Integer.class.isInstance(restaurant.calculateOderValue(addItemsList)));
+    }
+    @Test
+    public void calculating_total_order_value_should_return_the_total_price_of_the_order(){
+        addItemsList.add("Sweet corn soup");
+        addItemsList.add("Vegetable lasagne");
+        assertThat(restaurant.calculateOderValue(addItemsList),equalTo(388));
+    }
+
+    }

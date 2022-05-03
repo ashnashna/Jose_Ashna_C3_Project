@@ -68,6 +68,8 @@ public class Restaurant {
     public String getName() {
         return name;
     }
-
+    public int calculateOderValue(ArrayList<String> itemList) {
+        return null;
+    }
 
 }
